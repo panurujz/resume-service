@@ -1,6 +1,6 @@
 # resume-service
 
-build by
+Build by
 
 ```
 ECHO
@@ -9,11 +9,11 @@ POSTGRESQL
 ```
 
 > initial go init
-> go mod init github.com/panurujz/resume-service
+`go mod init github.com/panurujz/resume-service`
 
 > install echo
-> go get github.com/labstack/echo/v4
+`go get github.com/labstack/echo/v4` 
 
 > install gorm & postgres
-> go get -u gorm.io/gorm
-> go get -u gorm.io/driver/postgres
+`go get -u gorm.io/gorm`
+`go get -u gorm.io/driver/postgres`
