@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 
@@ -11,6 +11,7 @@ import (
 	"github.com/panurujz/resume-service/config"
 	"github.com/panurujz/resume-service/models"
 	"github.com/panurujz/resume-service/requests"
+	"github.com/panurujz/resume-service/utils"
 )
 
 var db = config.Open()
@@ -40,8 +41,12 @@ func saveUser(user models.User) models.User {
 	tx := db.WithContext(ctx)
 	tx.Create(&user)
 
-	u, _ := json.MarshalIndent(user, "", "  ")
-	fmt.Printf("create user success. %s \n", string(u))
+	res, err := utils.PrettyStruct(user)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("create user success. %s \n", res)
 
 	return user
 }

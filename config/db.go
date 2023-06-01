@@ -1,9 +1,11 @@
 package config
 
 import (
-	"fmt"
+	"database/sql"
 	"log"
+	"os"
 
+	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
@@ -11,12 +13,19 @@ import (
 
 func Open() (db *gorm.DB) {
 
-	db, err := gorm.Open(postgres.New(postgres.Config{
-		DSN:                  "host=localhost user=postgres password=P@ssw0rd dbname=postgres port=5432 sslmode=disable",
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	connection, _ := sql.Open("pgx", os.Getenv("DB_URL"))
+
+	db, err = gorm.Open(postgres.New(postgres.Config{
+		Conn:                 connection,
 		PreferSimpleProtocol: true,
 	}), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
-			TablePrefix: "goapp.",
+			TablePrefix: os.Getenv("DB_SCHEMA"),
 		},
 	})
 
@@ -25,8 +34,6 @@ func Open() (db *gorm.DB) {
 	}
 
 	// db.AutoMigrate(&models.User{})
-
-	fmt.Println("Connect database success.")
 
 	return db
 }

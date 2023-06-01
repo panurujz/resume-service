@@ -20,3 +20,6 @@ POSTGRESQL
 
 > install air hot reload
 `go install github.com/cosmtrek/air@latest`
+
+> install dotenv
+`go install github.com/joho/godotenv/cmd/godotenv@latest`
