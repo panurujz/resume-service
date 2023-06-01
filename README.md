@@ -7,5 +7,3 @@ ECHO
 GROM
 POSTGRESQL
 ```
-
-## provide rest api for client
