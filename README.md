@@ -17,3 +17,6 @@ POSTGRESQL
 > install gorm & postgres
 `go get -u gorm.io/gorm`
 `go get -u gorm.io/driver/postgres`
+
+> install air hot reload
+`go install github.com/cosmtrek/air@latest`
